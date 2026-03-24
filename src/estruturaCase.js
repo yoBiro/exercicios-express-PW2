@@ -1,29 +1,37 @@
 // Seção 7 - Estrutura Case
 
-export function diaSemana(dia) {
+export function diaSemana(req, res, dia) {
     switch (dia) {
         case 1:
             console.log("Domingo");
+            res.send("Domingo");
             break;
         case 2:
             console.log("Segunda-feira");
+            res.send("Segunda-feira");
             break;
         case 3:
             console.log("Terça-feira");
+            res.send("Terça-feira");
             break;
         case 4:
             console.log("Quarta-feira");
+            res.send("Quarta-feira");
             break;
         case 5:
             console.log("Quinta-feira");
+            res.send("Quinta-feira");
             break;
         case 6:
             console.log("Sexta-feira");
+            res.send("Sexta-feira");
             break;
         case 7:
             console.log("Sábado");
+            res.send("Sábado");
             break;
         default:
+            res.send("Dia inválido");
             console.log("Dia inválido");
     }
 }

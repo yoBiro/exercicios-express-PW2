@@ -15,11 +15,13 @@ export function array2(numeros) {
 }
 
 //Seção 6.2 - Arrays 3 (adição)
-function array3(carros) {
+function array3(req, res) {
+    const carros = ["Ferrari", "Lamborghini", "Porsche", "Maserati"]
     //índice 3, não remove nada, adiciona "Bugatti"
     carros.splice(3,0,"Bugatti")
     for (let i=0; i<=3; i++) {
         console.log(carros[i])   
+        res.send(carros[i])
     }
 }
 
@@ -33,5 +35,4 @@ function array4(nomes) {
     }
 }
 
-export { array3, array4 }
-module.exports = { array, array2, array3, array4 }
+export { array3 }

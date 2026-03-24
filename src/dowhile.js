@@ -1,6 +1,6 @@
 // Seção 9 - Laço de Repetição Do While
 
-export function fibonacci(cont) {
+export function fibonacci(req, res, cont) {
     let a = 0;
     let b = 1;
     let i = 1;
@@ -8,6 +8,7 @@ export function fibonacci(cont) {
             a = a+b;
             b = a-b;
             console.log(a);
+            res.send(a);
             i++;
     } while (i <= cont);
 }

@@ -1,12 +1,15 @@
 //Seção 5 - Laço de Repetição For
-export function tabuada(n) {
+export function tabuada(req, res) {
+    let n = 1;
     let i;
     let r;
     for (i = 0; i <= 10; i++) {
         console.log("--------Tabuada do " + i + "--------");
+        res.send("--------Tabuada do " + i + "--------");
         for (n = 1; n<=10; n++) {
             r = n*i;
             console.log(n + "x" + i + "=" + r);
+            res.send(n + "x" + i + "=" + r);
         }
     }
 }

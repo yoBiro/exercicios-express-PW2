@@ -1,11 +1,14 @@
 // Seção 4 - Operação Condicional
 
-export function ifComum(mundial) {
+export function ifComum(req, res) {
+    let mundial = 0;
     if (mundial == 0) {
         console.log("Seu time é fraco.")
+        res.send("Seu time é fraco.")
     }
     else {
         console.log("Você não torce para o time errado")
+        res.send("Você não torce para o time errado")
     }
 }
 
