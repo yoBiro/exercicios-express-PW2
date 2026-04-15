@@ -1,26 +1,32 @@
-// Seção 9 - Laço de Repetição Do While
+import express from 'express'
 
-export function fibonacci(req, res, cont) {
-    let a = 0;
-    let b = 1;
-    let i = 1;
-        do {
-            a = a+b;
-            b = a-b;
-            console.log(a);
-            res.send(a);
-            i++;
-    } while (i <= cont);
+const fibonacci = express.Router()
+
+function calcularFibonacci(cont = 5) {
+    let a = 0
+    let b = 1
+    let i = 1
+    const resultado = []
+
+    do {
+        a = a + b
+        b = a - b
+        resultado.push(a)
+        i++
+    } while (i <= cont)
+
+    return resultado
 }
 
-// Seção 9.1 - Exemplo de Potência usando Do While
+// params: /dowhile/6
+fibonacci.get('/:cont', (req, res) => {
+    const cont = Number(req.params.cont) || 5
 
-export function potencia(base, expoente) {
-    let resultado = 1;
-    let i = 1;
-        do {
-            resultado = resultado * base;
-            i++;
-        } while (i <= expoente);
-    console.log(resultado);
-}
+    res.json({
+        tipo: 'params',
+        valorRecebido: cont,
+        resultado: calcularFibonacci(cont)
+    })
+})
+
+export { fibonacci }

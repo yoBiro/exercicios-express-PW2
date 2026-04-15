@@ -1,58 +1,37 @@
-// Seção 7 - Estrutura Case
+import express from 'express'
 
-export function diaSemana(req, res, dia) {
+const diaSemana = express.Router()
+
+function buscarDia(dia) {
     switch (dia) {
         case 1:
-            console.log("Domingo");
-            res.send("Domingo");
-            break;
+            return 'Domingo'
         case 2:
-            console.log("Segunda-feira");
-            res.send("Segunda-feira");
-            break;
+            return 'Segunda-feira'
         case 3:
-            console.log("Terça-feira");
-            res.send("Terça-feira");
-            break;
+            return 'Terca-feira'
         case 4:
-            console.log("Quarta-feira");
-            res.send("Quarta-feira");
-            break;
+            return 'Quarta-feira'
         case 5:
-            console.log("Quinta-feira");
-            res.send("Quinta-feira");
-            break;
+            return 'Quinta-feira'
         case 6:
-            console.log("Sexta-feira");
-            res.send("Sexta-feira");
-            break;
+            return 'Sexta-feira'
         case 7:
-            console.log("Sábado");
-            res.send("Sábado");
-            break;
+            return 'Sabado'
         default:
-            res.send("Dia inválido");
-            console.log("Dia inválido");
+            return 'Dia invalido'
     }
 }
 
-// Seção 7.1 - Estrutura Case 2
+//  params: /estruturaCase/3
+diaSemana.get('/:dia', (req, res) => {
+    const dia = Number(req.params.dia) || 1
 
-export function classificacaoIdade(idade) {
-    switch (true) {
-        case (idade >= 0 && idade <= 12):
-            console.log("Criança");
-            break;
-        case (idade > 12 && idade <= 18):
-            console.log("Adolescente");
-            break;
-        case (idade > 18 && idade <= 60):
-            console.log("Adulto");
-            break;
-        case (idade > 60):
-            console.log("Idoso");
-            break;
-        default:
-            console.log("Idade inválida");
-    }
-}
+    res.json({
+        tipo: 'params',
+        valorRecebido: dia,
+        resultado: buscarDia(dia)
+    })
+})
+
+export { diaSemana }

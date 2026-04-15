@@ -1,25 +1,28 @@
 import express from 'express'
 
-export function whileLoop(res, req) {
-    function contagemRegressiva(res, req) {
-        let i = 10;
-        while (i >= 0) {
-            console.log(i);
-            res.send(i);
-            i--;
-        }
+const whileLoop = express.Router()
+
+function contagemRegressiva(inicio) {
+    let i = inicio
+    const resultado = []
+
+    while (i >= 0) {
+        resultado.push(i)
+        i--
     }
-    
-        // Seção 8.1 - Laço de Repetição While 2
-    
-    function somaAteCem(res, req) {
-        let i = 1;
-        let soma = 0;
-        while (i <= 100) {
-            soma += i;
-            i++;
-        }
-        console.log(soma);
-        res.send(soma);
-    }
+
+    return resultado
 }
+
+// params: /while/10
+whileLoop.get('/:inicio', (req, res) => {
+    const inicio = Number(req.params.inicio) || 10
+
+    res.json({
+        tipo: 'params',
+        valorRecebido: inicio,
+        resultado: contagemRegressiva(inicio)
+    })
+})
+
+export { whileLoop }

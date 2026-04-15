@@ -1,7 +1,26 @@
 import express from 'express'
 
-export function map(req, res) {
-    const materias1 = ['Matemática', 'Português', 'Inglês', 'História', 'Geografia'];
-    const materias2 = materias1.map((materia) => materia.toUpperCase());
-    res.send(materias2);
+const map = express.Router()
+
+function transformarMaterias(materiaExtra = '') {
+    const materias = ['Matematica', 'Portugues', 'Ingles', 'Historia', 'Geografia']
+
+    if (materiaExtra) {
+        materias.push(materiaExtra)
+    }
+
+    return materias.map((materia) => materia.toUpperCase())
 }
+
+// query string: /map?materia=Fisica
+map.get('/', (req, res) => {
+    const { materia = '' } = req.query
+
+    res.json({
+        tipo: 'query',
+        valorRecebido: materia,
+        resultado: transformarMaterias(materia)
+    })
+})
+
+export { map }

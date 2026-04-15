@@ -1,18 +1,25 @@
-export function estruturaLogica(req, res) {
-    
-    function idade() {
-        const maiorIdade = true;
-        const menorIdade = false;
-        
-        console.log(maiorIdade && menorIdade);
-        console.log(maiorIdade || menorIdade);
-        console.log(!maiorIdade)
+import express from 'express'
 
-        res.send({
-            maiorIdade: maiorIdade && menorIdade,
-            menorIdade: maiorIdade || menorIdade,
-            negacao: !maiorIdade
-        });
+const estruturaLogica = express.Router()
+
+function montarResultado(maiorIdade, menorIdade) {
+    return {
+        maiorIdadeEmenorIdade: maiorIdade && menorIdade,
+        maiorIdadeOuMenorIdade: maiorIdade || menorIdade,
+        negacaoDeMaiorIdade: !maiorIdade
     }
-    idade();
-}  
+}
+
+// params: /estruturaLogica/true/false
+estruturaLogica.get('/:maiorIdade/:menorIdade', (req, res) => {
+    const maiorIdade = converterBoolean(req.params.maiorIdade, true)
+    const menorIdade = converterBoolean(req.params.menorIdade, false)
+
+    res.json({
+        tipo: 'params',
+        valorRecebido: { maiorIdade, menorIdade },
+        resultado: montarResultado(maiorIdade, menorIdade)
+    })
+})
+
+export { estruturaLogica }

@@ -1,36 +1,24 @@
-// Seção 4 - Operação Condicional
+import express from 'express'
 
-export function ifComum(req, res) {
-    let mundial = 0;
+const ifComum = express.Router()
+
+function verificarMundial(mundial) {
     if (mundial == 0) {
-        console.log("Seu time é fraco.")
-        res.send("Seu time é fraco.")
+        return 'Seu time e fraco.'
     }
-    else {
-        console.log("Você não torce para o time errado")
-        res.send("Você não torce para o time errado")
-    }
+
+    return 'Voce nao torce para o time errado'
 }
 
-// Seção 4.1 - Operação Condicional 2 
+// query string: /src/estruturaCondicional?mundial=1
+ifComum.get('/', (req, res) => {
+    const mundial = Number(req.query.mundial) || 0
 
-export function ifUnitario(roupa, calcado) {
-    if (roupa === "Cropped" || calcado === "Chinelo") {
-        console.log("Pode não zé")
-    }
-}
+    res.json({
+        tipo: 'query',
+        valorRecebido: mundial,
+        resultado: verificarMundial(mundial)
+    })
+})
 
-export function ifComposto(destino, dias) {
-    if (destino === "Ilhabela" && dias === 3) {
-        console.log("Boa viagem!")
-    }else if (destino == "Rio de Janeiro" || destino === "Salvador") {
-        console.log("Boa sorte...")
-    }else{
-        ("Melhor ficar em casa")
-    }
-}
-
-export function ternario(foo) {
-    let bananas = foo ? 10 : 20 
-    console.log(bananas)
-}
+export { ifComum }
